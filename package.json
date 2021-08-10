@@ -1,0 +1,22 @@
+{
+  "name": "barber-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/nickrrs/barber-api.git",
+  "author": "Nickolas Ribeiro <nickolasleosantos@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.0",
+    "sequelize": "^6.6.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12",
+    "sequelize-cli": "^6.2.0",
+    "sucrase": "^3.20.0"
+  }
+}

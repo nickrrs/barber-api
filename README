@@ -1,0 +1,27 @@
+API de uma barbearia, feito utilizando as tecnologias:
+
+- Node.js
+    - MYSQL (DB)
+    - Sequelize (Migrations e MVC)
+    - Sucrase (For ES6 syntax's)
+    - Nodemon
+    - Express.js
+
+
+Para entender como o projeto foi feito, é simples, basta apenas entender o seguinte:
+
+1 - Foi utilizado o Express.js para realizar o roteamento, conexão com servidor local, etc..
+
+2 - Foi utilizado o Sequelize, para realizar migrations dentro de um DB, assim como também realizar a conexão entre todas as "faces" de uma arquitetura MVC.. ou seja, por exemplo,
+conectar um Model a uma tabela do DB.
+
+3 - Foi utilzado o Sucrase para aproveitar da sintaxe mais recente do JS.
+
+4 - Nodemon para automatizar o servidor local.
+
+OBS : Caso queira entender como a estrutura foi montada passo a passo veja da seguinte maneira:
+ - Acompanhe primeiramente os arquivos no root: app.js, server.js e routes.js
+
+ - Em seguida, observe o arquivo .sequelizerc, onde foi criado os path para as pastas que compoem a estrutura MVC e Migrations.
+ - Após isso, ao conferir o arquivo database.js dentro da pasta Config, podemos ver a configuração para acesso ao banco local, uma vez configurado é possivel rodar migrations com os comandos do sequelize.
+ - Depois disso, confira o arquivo index.js dentro da pasta Database, nesse arquivo é feito a conexão entre os Models criados, e o banco de dados e suas tabelas.
