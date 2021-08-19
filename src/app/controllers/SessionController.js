@@ -1,7 +1,7 @@
 // Controller de Autenticação (JWT)
 import jwt from 'jsonwebtoken';
 import User from '../models/User';
-
+import authConfig from '../../config/auth';
 class SessionController{
     async store(req, res) {
         const {email, password} = req.body;
@@ -26,8 +26,8 @@ class SessionController{
             },
             // No segundo parametro é nececssário informar uma string unica e segura,
             // sendo assim, inseri uma string criptografada usando o site MD5 Online
-            token: jwt.sign({ id }, '0f117ac47b9cff98a99e2438efadb3a3', {
-                expiresIn: '7d', // O terceiro parametro do método Sign, seria o de um objeto onde voce pode definir algumas configurações adicionais à autenticação..
+            token: jwt.sign({ id }, authConfig.secret, {
+                expiresIn: authConfig.expiresIn, // O terceiro parametro do método Sign, seria o de um objeto onde voce pode definir algumas configurações adicionais à autenticação..
             }),                  // esse "expiresIn" por exemplo, define que o token gerado automaticamente terá 7 dias até expirar.
         });
     }

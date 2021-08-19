@@ -10,4 +10,7 @@ routes.post('/users', UserController.store);
 
 // Auth routes
 routes.post('/sessions', SessionController.store);
+
+
+
 export default routes;
