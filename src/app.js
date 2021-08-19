@@ -1,7 +1,8 @@
-import express from "express"; // Using sucrase to implements this syntax..
+import express from 'express'; // Using sucrase to implements this syntax..
 
 import routes from "./routes"; // Using sucrase to implements this syntax..
 
+import './database';
 class App {
   constructor() {
     this.app = express();
