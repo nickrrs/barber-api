@@ -1,3 +1,8 @@
+PARA INSTALAR O PROJETO:
+1 - git clone https://github.com/nickrrs/barber-api.git
+2 - yarn install dentro do root do projeto.
+3 - yarn dev pra rodar o servidor local.
+
 API de uma barbearia, feito utilizando as tecnologias:
 
 - Node.js
