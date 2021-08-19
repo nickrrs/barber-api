@@ -1,11 +1,11 @@
 // Using sucrase to implements this syntax..
-import Sequelize from 'sequelize'
+import Sequelize from 'sequelize';
 // Using sucrase to implements this syntax..
 //Same as const = require('..config/database)
-import databaseConfig from '../config/database'
-import User from '../config/database'
+import databaseConfig from '../config/database';
+import User from '../app/models/User';
 
-const models = [User]
+const models = [User];
 
 class Database {
     constructor(){
