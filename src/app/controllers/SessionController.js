@@ -1,9 +1,21 @@
 // Controller de Autenticação (JWT)
 import jwt from 'jsonwebtoken';
+import  * as Yup from 'yup';
 import User from '../models/User';
 import authConfig from '../../config/auth';
 class SessionController{
     async store(req, res) {
+
+
+        const yupSchema = Yup.object().shape({ // estou definindo o schema/estrutura de um objeto, ou seja, os "campos que pertencem ao objeto"
+            email: Yup.string().email().required(),
+            password: Yup.string().required(),
+        });
+
+        if (!(await yupSchema.isValid(req.body))) { // valida os valores do body da requisição, com os campos e "regras" do objeto criado com o Yup.
+            return res.status(400).json({error: "Validação dos campos falhou."});
+        }
+
         const {email, password} = req.body;
 
         // Verificar se o email fornecido pelo usuário existe.
@@ -12,7 +24,7 @@ class SessionController{
             return res.status(401).json({error: "Usuário não encontrado."});
         }
         // Verifica se a senha corresponde
-        if(!await user.checkPassword){
+        if(!await user.checkPassword(password)){
             return res.status(401).json({error: "Senha não corresponde."});
         }
 

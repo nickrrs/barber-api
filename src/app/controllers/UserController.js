@@ -1,7 +1,19 @@
+import * as Yup from 'yup';
 import User from '../models/User';
 
 class UserController {
     async store(req, res){
+
+        const yupSchema = Yup.object().shape({ // estou definindo o schema/estrutura de um objeto, ou seja, os "campos que pertencem ao objeto"
+            name: Yup.string().required(),
+            email: Yup.string().email().required(),
+            password: Yup.string().required().min(6),
+        });
+
+        if (!(await yupSchema.isValid(req.body))) { // valida os valores do body da requisição, com os campos e "regras" do objeto criado com o Yup.
+            return res.status(400).json({error: "Validação dos campos falhou."});
+        }
+
         const userExists = await User.findOne({
             where: {email: req.body.email}
         });
@@ -22,6 +34,23 @@ class UserController {
     }
 
     async update(req, res){
+
+        const yupSchema = Yup.object().shape({ // estou definindo o schema/estrutura de um objeto, ou seja, os "campos que pertencem ao objeto"
+            name: Yup.string(),
+            email: Yup.string().email(),
+            oldPassword: Yup.string().min(6),
+            password: Yup.string().min(6).when('oldPassword', (oldPassword, field) =>
+                oldPassword ? field.required() : field      // caso old password seja informado, o "field"(password) se torna um campo obrigatório, caso não ele passa o campo password normal.
+            ),
+            confirmPassword: Yup.string().when('password', (password, field) =>
+                password ? field.required().oneOf([Yup.ref('password')]) : field // caso password seja informado, o "field"(confirmPassword) se torna um campo obrigatório
+            )                                                                       // dai então ele define que o field, seja um campo que usa como ref o campo "password" já criado.
+        });
+
+        if (!(await yupSchema.isValid(req.body))) { // valida os valores do body da requisição, com os campos e "regras" do objeto criado com o Yup.
+            return res.status(400).json({error: "Validação dos campos falhou."});
+        }
+
         const {email, oldPassword} = req.body;
         const user = await User.findByPk(req.userId);
 

@@ -24,6 +24,10 @@ conectar um Model a uma tabela do DB.
 
 4 - Nodemon para automatizar o servidor local.
 
+5 - JWT para autenticação de usuarios.
+
+6 - YUP para validação de campos.
+
 OBS : Caso queira entender como a estrutura foi montada passo a passo veja da seguinte maneira:
  - Acompanhe primeiramente os arquivos no root: app.js, server.js e routes.js
 
